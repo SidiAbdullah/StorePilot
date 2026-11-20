@@ -1,10 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
-import { ShoppingCart, User, LogOut } from "lucide-react";
+import { ShoppingBag, User, LogOut } from "lucide-react";
 import { useAuth } from "../../hooks/useAuth";
+import { useCart } from "../../hooks/useCart";
 
 export default function Navbar() {
   const { user, isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
+  const { cartCount } = useCart();
 
   const handleLogout = () => {
     logout();
@@ -27,8 +29,8 @@ export default function Navbar() {
           {isAuthenticated ? (
             <>
               <Link to="/cart" className="nav-icon">
-                <ShoppingCart size={20} />
-                Cart
+                <ShoppingBag size={18} />
+                Cart ({cartCount})
               </Link>
 
               <span className="nav-user">

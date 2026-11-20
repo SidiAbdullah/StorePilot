@@ -17,6 +17,7 @@ public class ProductsController : ControllerBase
         _productService = productService;
     }
 
+    [AllowAnonymous]
     [HttpGet]
     public async Task<ActionResult<IEnumerable<ProductResponseDto>>> GetAll()
     {
@@ -24,6 +25,7 @@ public class ProductsController : ControllerBase
         return Ok(products);
     }
 
+    [AllowAnonymous]
     [HttpGet("{id:int}")]
     public async Task<ActionResult<ProductResponseDto>> GetById(int id)
     {

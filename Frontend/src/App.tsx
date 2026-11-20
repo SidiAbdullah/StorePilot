@@ -11,6 +11,7 @@ import Checkout from "./pages/Checkout";
 import MyOrders from "./pages/MyOrders";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import OrderSuccess from "./pages/OrderSuccess";
 
 import Dashboard from "./pages/admin/Dashboard";
 
@@ -28,6 +29,7 @@ function App() {
           <Route element={<ProtectedRoute allowedRoles={["Customer"]} />}>
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
+            <Route path="/order-success" element={<OrderSuccess />} />
             <Route path="/my-orders" element={<MyOrders />} />
           </Route>
 

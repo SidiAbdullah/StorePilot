@@ -1,0 +1,10 @@
+@import "./variables.css";
+@import "./global.css";
+@import "./navbar.css";
+@import "./auth.css";
+@import "./footer.css";
+@import "./products.css";
+@import "./product-details.css";
+@import "./loader.css";
+@import "./cart.css";
+@import "./checkout.css";
