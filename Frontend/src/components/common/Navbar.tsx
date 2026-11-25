@@ -28,10 +28,12 @@ export default function Navbar() {
         <div className="nav-actions">
           {isAuthenticated ? (
             <>
-              <Link to="/cart" className="nav-icon">
-                <ShoppingBag size={18} />
-                Cart ({cartCount})
-              </Link>
+              {user?.role === "Customer" && (
+                <Link to="/cart" className="nav-icon">
+                  <ShoppingBag size={18} />
+                  Cart ({cartCount})
+                </Link>
+              )}
 
               <span className="nav-user">
                 <User size={18} />
