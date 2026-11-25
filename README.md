@@ -18,6 +18,28 @@ A full-stack e-commerce and store management application built with React and AS
 - Admin dashboard with store overview and recent orders.
 - RESTful API integration.
 
+### Screenshots
+
+**Home Page**
+
+![Home Page](screenshots/home.png)
+
+**Products Page**
+
+![Products Page](screenshots/products.png)
+
+**Shopping Cart**
+
+![Shopping Cart](screenshots/cart.png)
+
+**Checkout**
+
+![Checkout](screenshots/checkout.png)
+
+**Admin Dashboard**
+
+![Admin Dashboard](screenshots/dashboard.png)
+
 ### Getting Started
 
 **Backend**
