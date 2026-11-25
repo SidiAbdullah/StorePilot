@@ -121,6 +121,17 @@ public class OrderService : IOrderService
         return MapToResponseDto(order);
     }
 
+    // Get all orders (Admin only)
+    public async Task<IReadOnlyList<OrderResponseDto>> GetAllOrdersAsync()
+    {
+        var orders = await _context.Orders
+            .Include(o => o.Items)
+            .OrderByDescending(o => o.CreatedAt)
+            .ToListAsync();
+
+        return orders.Select(MapToResponseDto).ToList();
+    }
+
     // Map Order entity to response DTO
     private static OrderResponseDto MapToResponseDto(Order order)
     {

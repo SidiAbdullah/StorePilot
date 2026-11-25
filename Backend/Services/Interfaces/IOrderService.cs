@@ -14,4 +14,6 @@ public interface IOrderService
     Task<OrderResponseDto?> GetMyOrderByIdAsync(
         int userId,
         int orderId);
+
+        Task<IReadOnlyList<OrderResponseDto>> GetAllOrdersAsync();
 }

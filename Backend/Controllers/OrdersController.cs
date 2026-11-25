@@ -8,7 +8,6 @@ namespace StorePilot.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-[Authorize(Roles = "Customer")]
 public class OrdersController : ControllerBase
 {
     private readonly IOrderService _orderService;
@@ -19,6 +18,7 @@ public class OrdersController : ControllerBase
     }
 
     // POST: api/Orders/checkout
+    [Authorize(Roles = "Customer")]
     [HttpPost("checkout")]
     public async Task<ActionResult<OrderResponseDto>> Checkout(
         CheckoutOrderDto dto)
@@ -47,6 +47,7 @@ public class OrdersController : ControllerBase
     }
 
     // GET: api/Orders/my
+    [Authorize(Roles = "Customer")]
     [HttpGet("my")]
     public async Task<ActionResult<IReadOnlyList<OrderResponseDto>>> GetMyOrders()
     {
@@ -58,6 +59,7 @@ public class OrdersController : ControllerBase
     }
 
     // GET: api/Orders/5
+    [Authorize(Roles = "Customer")]
     [HttpGet("{orderId:int}")]
     public async Task<ActionResult<OrderResponseDto>> GetMyOrderById(
         int orderId)
@@ -73,6 +75,16 @@ public class OrdersController : ControllerBase
 
         return Ok(order);
     }
+
+// GET: api/Orders/all
+[Authorize(Roles = "Admin")]
+[HttpGet("all")]
+public async Task<ActionResult<IReadOnlyList<OrderResponseDto>>> GetAllOrders()
+{
+    var orders = await _orderService.GetAllOrdersAsync();
+
+    return Ok(orders);
+}
 
     private int GetCurrentUserId()
     {

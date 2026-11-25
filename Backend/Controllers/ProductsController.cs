@@ -37,8 +37,8 @@ public class ProductsController : ControllerBase
         return Ok(product);
     }
 
-    [HttpPost]
     [Authorize(Roles = "Admin")]
+    [HttpPost]
     public async Task<ActionResult<ProductResponseDto>> Create(CreateProductDto dto)
     {
         try
@@ -56,8 +56,8 @@ public class ProductsController : ControllerBase
         }
     }
 
-    [HttpPut("{id:int}")]
     [Authorize(Roles = "Admin")]
+    [HttpPut("{id:int}")]
     public async Task<ActionResult<ProductResponseDto>> Update(
         int id,
         UpdateProductDto dto)
@@ -77,8 +77,8 @@ public class ProductsController : ControllerBase
         }
     }
 
-    [HttpDelete("{id:int}")]
     [Authorize(Roles = "Admin")]
+    [HttpDelete("{id:int}")]
     public async Task<IActionResult> Delete(int id)
     {
         var deleted = await _productService.DeleteAsync(id);

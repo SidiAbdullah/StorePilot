@@ -13,7 +13,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import OrderSuccess from "./pages/OrderSuccess";
 
-import Dashboard from "./pages/admin/Dashboard";
+import Dashboard from "./pages/Dashboard";
 import OrderDetails from "./pages/OrderDetails";
 
 function App() {
