@@ -1,13 +1,13 @@
 # StorePilot
 
-A full-stack e-commerce application built with React and ASP.NET Core Web API.
+A full-stack e-commerce and store management application built with React and ASP.NET Core Web API.
 
 ### Tech Stack
 
 - **Frontend:** React, TypeScript, Vite, Axios
 - **Backend:** ASP.NET Core Web API (.NET 10)
 - **Database:** SQL Server, Entity Framework Core
-- **Authentication:** JWT
+- **Authentication:** JWT, Role-Based Authorization
 
 ### Features
 
@@ -15,6 +15,7 @@ A full-stack e-commerce application built with React and ASP.NET Core Web API.
 - Product and category management.
 - Shopping cart for guests and authenticated users.
 - Order checkout and management.
+- Admin dashboard with store overview and recent orders.
 - RESTful API integration.
 
 ### Getting Started
@@ -22,7 +23,7 @@ A full-stack e-commerce application built with React and ASP.NET Core Web API.
 **Backend**
 
 1. Configure your SQL Server connection string.
-2. Configure your JWT settings using .NET User Secrets.
+2. Configure JWT settings using .NET User Secrets.
 3. Run the backend:
 
 ```bash
