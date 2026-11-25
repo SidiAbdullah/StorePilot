@@ -1,65 +1,47 @@
 # StorePilot
 
-A full-stack store management application built with ASP.NET Core Web API, React, and SQL Server.
+A full-stack e-commerce application built with React and ASP.NET Core Web API.
 
-## Tech Stack
+### Tech Stack
 
-**Backend**
+- **Frontend:** React, TypeScript, Vite, Axios
+- **Backend:** ASP.NET Core Web API (.NET 10)
+- **Database:** SQL Server, Entity Framework Core
+- **Authentication:** JWT
 
-- C# / ASP.NET Core Web API
-- Entity Framework Core
-- SQL Server
-- JWT Authentication
+### Features
 
-**Frontend**
-
-- React
-- Vite
-- JavaScript
-- Axios
-- React Router
-
-## Features
-
-- User authentication and authorization.
-- Role-based access control.
+- User authentication and role-based authorization.
 - Product and category management.
-- Shopping cart management.
-- RESTful API architecture.
-- Database management with Entity Framework Core.
-- API rate limiting and logging.
+- Shopping cart for guests and authenticated users.
+- Order checkout and management.
+- RESTful API integration.
 
-## Project Structure
-
-```text
-StorePilot/
-├── backend/
-├── frontend/
-├── .gitignore
-├── README.md
-```
-
-## Getting Started
+### Getting Started
 
 **Backend**
 
-1. Open the backend solution in Visual Studio.
-2. Configure your SQL Server connection string.
-3. Apply Entity Framework migrations.
-4. Run the ASP.NET Core application.
+1. Configure your SQL Server connection string.
+2. Configure your JWT settings using .NET User Secrets.
+3. Run the backend:
+
+```bash
+dotnet restore
+dotnet run
+```
 
 **Frontend**
 
 1. Navigate to the frontend directory.
-2. Run `npm install`.
-3. Run `npm run dev`.
+2. Install dependencies and start the application:
 
-## Project Status
+```bash
+npm install
+npm run dev
+```
 
-Currently under development. The backend is substantially implemented, and frontend development is in progress.
-
-## Author
+### Author
 
 **Sidi Abdullah**
 
-[GitHub](https://github.com/SidiAbdullah)
+- GitHub: [SidiAbdullah](https://github.com/SidiAbdullah)

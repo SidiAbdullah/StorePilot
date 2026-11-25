@@ -5,7 +5,6 @@ export interface Product {
   description: string | null;
   price: number;
   imageUrl: string | null;
-  minimumStockLevel: number;
   isActive: boolean;
   categoryId: number | null;
   categoryName?: string | null;

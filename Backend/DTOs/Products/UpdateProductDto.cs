@@ -21,9 +21,6 @@ public class UpdateProductDto
     [MaxLength(500)]
     public string? ImageUrl { get; set; }
 
-    [Range(0, int.MaxValue)]
-    public int MinimumStockLevel { get; set; }
-
     public int? CategoryId { get; set; }
 
     public bool IsActive { get; set; }

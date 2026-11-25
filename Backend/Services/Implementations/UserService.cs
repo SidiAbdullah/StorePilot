@@ -79,7 +79,6 @@ public class UserService : IUserService
         var user = await _context.Users
             .Include(u => u.Orders)
             .Include(u => u.Carts)
-            .Include(u => u.StockMovements)
             .FirstOrDefaultAsync(u => u.Id == id);
 
         if (user == null)
@@ -99,9 +98,7 @@ public class UserService : IUserService
                     "You cannot delete the last Admin.");
         }
 
-        if (user.Orders.Any() ||
-            user.Carts.Any() ||
-            user.StockMovements.Any())
+        if (user.Orders.Any() || user.Carts.Any())
         {
             throw new InvalidOperationException(
                 "Cannot delete this user because they have related records.");

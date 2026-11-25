@@ -2,7 +2,6 @@
 using StorePilot.Data;
 using StorePilot.DTOs.Orders;
 using StorePilot.Models;
-using StorePilot.Models.Enums;
 using StorePilot.Services.Interfaces;
 using System.Data;
 
@@ -53,8 +52,6 @@ public class OrderService : IOrderService
             CreatedAt = DateTime.UtcNow
         };
 
-        var stockMovements = new List<StockMovement>();
-
         decimal totalAmount = 0;
 
         foreach (var cartItem in cart.Items)
@@ -65,49 +62,6 @@ public class OrderService : IOrderService
             {
                 throw new InvalidOperationException(
                     $"Product '{product.Name}' is unavailable.");
-            }
-
-            var inventories = await _context.Inventory
-                .Where(i => i.ProductId == product.Id && i.Quantity > 0)
-                .OrderBy(i => i.Id)
-                .ToListAsync();
-
-            long availableQuantity = inventories.Sum(
-                i => (long)i.Quantity);
-
-            if (availableQuantity < cartItem.Quantity)
-            {
-                throw new InvalidOperationException(
-                    $"Insufficient stock for '{product.Name}'. " +
-                    $"Available: {availableQuantity}, " +
-                    $"Requested: {cartItem.Quantity}.");
-            }
-
-            var remainingQuantity = cartItem.Quantity;
-
-            foreach (var inventory in inventories)
-            {
-                if (remainingQuantity == 0)
-                    break;
-
-                var quantityToDeduct = Math.Min(
-                    inventory.Quantity,
-                    remainingQuantity);
-
-                inventory.Quantity -= quantityToDeduct;
-                inventory.LastUpdated = DateTime.UtcNow;
-
-                stockMovements.Add(new StockMovement
-                {
-                    ProductId = product.Id,
-                    WarehouseId = inventory.WarehouseId,
-                    UserId = userId,
-                    MovementType = MovementType.StockOut,
-                    Quantity = quantityToDeduct,
-                    CreatedAt = DateTime.UtcNow
-                });
-
-                remainingQuantity -= quantityToDeduct;
             }
 
             var subtotal = product.Price * cartItem.Quantity;
@@ -127,8 +81,6 @@ public class OrderService : IOrderService
         order.TotalAmount = totalAmount;
 
         _context.Orders.Add(order);
-
-        _context.StockMovements.AddRange(stockMovements);
 
         _context.CartItems.RemoveRange(cart.Items);
 

@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StorePilot.Models;
-using StorePilot.Models.Enums;
 using System.Reflection.Emit;
 
 namespace StorePilot.Data;
@@ -15,9 +14,6 @@ public class StorePilotDbContext : DbContext
     public DbSet<User> Users => Set<User>();
     public DbSet<Product> Products => Set<Product>();
     public DbSet<Category> Categories => Set<Category>();
-    public DbSet<Warehouse> Warehouses => Set<Warehouse>();
-    public DbSet<Inventory> Inventory => Set<Inventory>();
-    public DbSet<StockMovement> StockMovements => Set<StockMovement>();
     public DbSet<Cart> Carts => Set<Cart>();
     public DbSet<CartItem> CartItems => Set<CartItem>();
     public DbSet<Order> Orders => Set<Order>();
@@ -61,45 +57,11 @@ public class StorePilotDbContext : DbContext
                 .OnDelete(DeleteBehavior.SetNull);
         });
 
-        modelBuilder.Entity<Inventory>(entity =>
-        {
-            entity.HasIndex(i => new { i.ProductId, i.WarehouseId }).IsUnique();
-
-            entity.HasOne(i => i.Product)
-                .WithMany(p => p.Inventories)
-                .HasForeignKey(i => i.ProductId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            entity.HasOne(i => i.Warehouse)
-                .WithMany(w => w.Inventories)
-                .HasForeignKey(i => i.WarehouseId)
-                .OnDelete(DeleteBehavior.Restrict);
-        });
-
-        modelBuilder.Entity<StockMovement>(entity =>
-        {
-            entity.Property(sm => sm.MovementType)
-                .HasConversion<string>()
-                .HasMaxLength(20);
-
-            entity.HasOne(sm => sm.Product)
-                .WithMany(p => p.StockMovements)
-                .HasForeignKey(sm => sm.ProductId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            entity.HasOne(sm => sm.Warehouse)
-                .WithMany(w => w.StockMovements)
-                .HasForeignKey(sm => sm.WarehouseId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            entity.HasOne(sm => sm.User)
-                .WithMany(u => u.StockMovements)
-                .HasForeignKey(sm => sm.UserId)
-                .OnDelete(DeleteBehavior.Restrict);
-        });
-
         modelBuilder.Entity<Cart>(entity =>
         {
+            entity.Property(c => c.GuestToken)
+                .HasMaxLength(100);
+
             entity.HasIndex(c => c.GuestToken)
                 .IsUnique()
                 .HasFilter("[GuestToken] IS NOT NULL");

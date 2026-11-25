@@ -21,9 +21,6 @@ public class CreateProductDto
     [MaxLength(500)]
     public string? ImageUrl { get; set; }
 
-    [Range(0, int.MaxValue)]
-    public int MinimumStockLevel { get; set; } = 5;
-
     [Range(1, int.MaxValue)]
     public int? CategoryId { get; set; }
 }

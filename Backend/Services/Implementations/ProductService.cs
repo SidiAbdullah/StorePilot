@@ -62,7 +62,6 @@ public class ProductService : IProductService
             Description = dto.Description,
             Price = dto.Price,
             ImageUrl = dto.ImageUrl,
-            MinimumStockLevel = dto.MinimumStockLevel,
             CategoryId = dto.CategoryId,
             IsActive = true,
             CreatedAt = DateTime.UtcNow,
@@ -111,7 +110,6 @@ public class ProductService : IProductService
         product.Description = dto.Description;
         product.Price = dto.Price;
         product.ImageUrl = dto.ImageUrl;
-        product.MinimumStockLevel = dto.MinimumStockLevel;
         product.CategoryId = dto.CategoryId;
         product.IsActive = dto.IsActive;
         product.UpdatedAt = DateTime.UtcNow;
@@ -153,7 +151,6 @@ public class ProductService : IProductService
             Description = product.Description,
             Price = product.Price,
             ImageUrl = product.ImageUrl,
-            MinimumStockLevel = product.MinimumStockLevel,
             IsActive = product.IsActive,
             CategoryId = product.CategoryId,
             CategoryName = product.Category?.Name
