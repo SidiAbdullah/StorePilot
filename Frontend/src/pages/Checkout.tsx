@@ -1,9 +1,15 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 import api from "../api/axios";
 import { useCart } from "../hooks/useCart";
 import Loader from "../components/common/Loader";
+
+interface ApiError {
+  message?: string;
+  title?: string;
+}
 
 export default function Checkout() {
   const navigate = useNavigate();
@@ -13,28 +19,37 @@ export default function Checkout() {
   const [processing, setProcessing] = useState(false);
   const [error, setError] = useState("");
 
+  const [customerName, setCustomerName] = useState("");
+  const [customerPhone, setCustomerPhone] = useState("");
+  const [shippingAddress, setShippingAddress] = useState("");
+
   const handleCheckout = async () => {
     try {
       setProcessing(true);
       setError("");
 
-      const response = await api.post("/Orders/checkout");
-
+      const response = await api.post("/Orders/checkout", {
+        customerName,
+        customerPhone,
+        shippingAddress,
+      });
       await refreshCart();
 
       navigate("/order-success", {
         state: {
           order: response.data,
-          success: true,
         },
       });
-    } catch (err: any) {
-      const message =
-        err.response?.data?.message ||
-        err.response?.data?.title ||
-        "Checkout failed. Please try again.";
-
-      setError(message);
+    } catch (err: unknown) {
+      if (axios.isAxiosError<ApiError>(err)) {
+        setError(
+          err.response?.data?.message ||
+            err.response?.data?.title ||
+            "Checkout failed",
+        );
+      } else {
+        setError("An unexpected error occurred.");
+      }
     } finally {
       setProcessing(false);
     }
@@ -96,6 +111,33 @@ export default function Checkout() {
           </div>
 
           {error && <div className="error-message">{error}</div>}
+
+          <div className="checkout-form">
+            <h2>Shipping Information</h2>
+
+            <input
+              type="text"
+              placeholder="Customer Name"
+              value={customerName}
+              onChange={(e) => setCustomerName(e.target.value)}
+              required
+            />
+
+            <input
+              type="tel"
+              placeholder="Phone Number"
+              value={customerPhone}
+              onChange={(e) => setCustomerPhone(e.target.value)}
+              required
+            />
+
+            <textarea
+              placeholder="Shipping Address"
+              value={shippingAddress}
+              onChange={(e) => setShippingAddress(e.target.value)}
+              required
+            />
+          </div>
 
           <button
             className="confirm-order-btn"

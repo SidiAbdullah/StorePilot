@@ -93,30 +93,48 @@
 }
 
 .order-success {
-  min-height: 70vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
+  max-width: 600px;
+  margin: 70px auto;
+  padding: 40px 24px;
   text-align: center;
-  padding: 30px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+
+.order-success > svg {
   color: var(--success);
+  margin-bottom: 20px;
 }
 
 .order-success h1 {
   color: var(--text-primary);
+  margin-bottom: 12px;
 }
 
-.order-success p {
+.order-success > p {
   color: var(--text-secondary);
+}
+
+.success-order-details {
+  margin: 25px 0;
+  padding: 18px;
+  background: var(--background);
+  border-radius: var(--radius-md);
+  text-align: left;
+}
+
+.success-order-details p {
+  margin: 10px 0;
+  color: var(--text-primary);
 }
 
 .success-actions {
   display: flex;
-  gap: 15px;
-  flex-wrap: wrap;
   justify-content: center;
+  gap: 12px;
+  margin-top: 25px;
+  flex-wrap: wrap;
 }
 
 .secondary-btn {
@@ -124,6 +142,62 @@
   border: 1px solid var(--border);
   border-radius: 8px;
   color: var(--text-primary);
+}
+
+.checkout-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 24px 0;
+  padding: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+
+.checkout-form h2 {
+  margin: 0 0 8px;
+  color: var(--text-primary);
+  font-size: 1.25rem;
+}
+
+.checkout-form input,
+.checkout-form textarea {
+  width: 100%;
+  padding: 13px 15px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--background);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.95rem;
+  outline: none;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+  box-sizing: border-box;
+}
+
+.checkout-form input:focus,
+.checkout-form textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
+}
+
+.checkout-form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.checkout-form input::placeholder,
+.checkout-form textarea::placeholder {
+  color: var(--text-secondary);
+}
+
+@media (max-width: 600px) {
+  .checkout-form {
+    padding: 18px;
+  }
 }
 
 @media (max-width: 800px) {

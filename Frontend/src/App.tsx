@@ -14,6 +14,7 @@ import Register from "./pages/Register";
 import OrderSuccess from "./pages/OrderSuccess";
 
 import Dashboard from "./pages/admin/Dashboard";
+import OrderDetails from "./pages/OrderDetails";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/order-success" element={<OrderSuccess />} />
             <Route path="/my-orders" element={<MyOrders />} />
+            <Route path="/my-orders/:orderId" element={<OrderDetails />} />
           </Route>
 
           <Route element={<ProtectedRoute allowedRoles={["Admin"]} />}>
